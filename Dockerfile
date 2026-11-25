@@ -1,10 +1,10 @@
+
 # =============================================================================
 # Stage 1: Build & Publish (.NET 10 SDK)
 # =============================================================================
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
-# Copy project files first for optimal Docker layer caching
 COPY src/CabinetLogs.Domain/CabinetLogs.Domain.csproj src/CabinetLogs.Domain/
 COPY src/CabinetLogs.Application/CabinetLogs.Application.csproj src/CabinetLogs.Application/
 COPY src/CabinetLogs.Infrastructure/CabinetLogs.Infrastructure.csproj src/CabinetLogs.Infrastructure/
@@ -12,7 +12,6 @@ COPY src/CabinetLogs.Api/CabinetLogs.Api.csproj src/CabinetLogs.Api/
 
 RUN dotnet restore src/CabinetLogs.Api/CabinetLogs.Api.csproj
 
-# Copy full source code and publish
 COPY src/ src/
 RUN dotnet publish src/CabinetLogs.Api/CabinetLogs.Api.csproj \
     -c Release \
@@ -25,7 +24,11 @@ RUN dotnet publish src/CabinetLogs.Api/CabinetLogs.Api.csproj \
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
 WORKDIR /app
 
-# Render injects PORT at runtime (default 10000); 8080 is used as local Docker fallback.
+# Install Kerberos dependency required by Npgsql
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libgssapi-krb5-2 \
+    && rm -rf /var/lib/apt/lists/*
+
 ENV ASPNETCORE_ENVIRONMENT=Production \
     ASPNETCORE_HTTP_PORTS=8080 \
     DOTNET_RUNNING_IN_CONTAINER=true

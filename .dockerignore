@@ -21,7 +21,6 @@ secrets.json
 
 # Non-runtime folders
 tests/
-docs/
 TestResults/
 coverage/
 README.md

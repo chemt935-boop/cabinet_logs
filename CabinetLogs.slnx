@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/CabinetLogs.Api/CabinetLogs.Api.csproj" />
+    <Project Path="src/CabinetLogs.Application/CabinetLogs.Application.csproj" />
+    <Project Path="src/CabinetLogs.Domain/CabinetLogs.Domain.csproj" />
+    <Project Path="src/CabinetLogs.Infrastructure/CabinetLogs.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/CabinetLogs.Tests/CabinetLogs.Tests.csproj" />
+  </Folder>
+</Solution>

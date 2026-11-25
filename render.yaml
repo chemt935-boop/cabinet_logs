@@ -1,0 +1,39 @@
+services:
+  - type: web
+    name: cabinet-logs-api
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    healthCheckPath: /api/v1/health
+    autoDeploy: true
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: ConnectionStrings__DefaultConnection
+        sync: false
+      - key: Supabase__Url
+        sync: false
+      - key: Supabase__ServiceRoleKey
+        sync: false
+      - key: Supabase__AnonKey
+        sync: false
+      - key: Supabase__StorageBucket
+        value: cabinet-log-photos
+      - key: Supabase__SignedUrlExpirySeconds
+        value: "300"
+      - key: PhotoUpload__MaxFileSizeBytes
+        value: "5242880"
+      - key: PhotoUpload__MaxPhotosPerLog
+        value: "10"
+      - key: Database__AutoMigrate
+        value: "false"
+      - key: Scalar__Enabled
+        value: "true"
+      - key: ApiSecurity__RequireApiKey
+        value: "false"
+      - key: ApiSecurity__ApiKeyHeaderName
+        value: X-Api-Key
+      - key: ApiSecurity__ApiKey
+        sync: false
+      - key: Cors__AllowedOrigins__0
+        value: "*"

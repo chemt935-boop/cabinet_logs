@@ -1,0 +1,24 @@
+## .NET / Visual Studio
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+TestResults/
+coverage/
+
+## Secrets and local configuration — NEVER commit real credentials
+appsettings.Local.json
+appsettings.*.local.json
+.env
+.env.*
+secrets.json
+
+## OS files
+.DS_Store
+Thumbs.db

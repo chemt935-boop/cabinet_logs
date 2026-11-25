@@ -1,0 +1,28 @@
+# Build outputs
+**/bin/
+**/obj/
+**/out/
+
+# Git & IDE metadata
+.git/
+.gitignore
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+
+# Local secrets — NEVER bake secrets into Docker images
+**/appsettings.Local.json
+**/appsettings.*.local.json
+.env
+.env.*
+secrets.json
+
+# Non-runtime folders
+tests/
+docs/
+TestResults/
+coverage/
+README.md
+render.yaml
